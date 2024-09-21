@@ -1,0 +1,120 @@
+<template>
+  <div class="home-view">
+    <b-card no-body class="tab-card">
+      <b-card-header class="custom-header"> <!-- Apply the custom header class here -->
+        <!-- The header here is styled to match the notebook tab appearance -->
+      </b-card-header>
+      <b-tabs v-model="tabIndex" card class="custom-tabs">
+        <b-tab title="Form" :title-link-class="linkClass(0)">
+          <div class="component-page">
+            <form></form>
+          </div>
+        </b-tab>
+        <b-tab title="List" :title-link-class="linkClass(1)">
+          <div class="component-page">
+            <ist></list>
+          </div>
+        </b-tab>
+      </b-tabs>
+    </b-card>
+  </div>
+</template>
+
+<script>
+import { BCard, BCardHeader, BTab, BTabs } from 'bootstrap-vue-next';
+import Form from '../components/pages/Form.vue';
+import List from '../components/pages/List.vue';
+
+export default {
+  name: 'HomePage',
+  components: {
+    BCard,
+    BCardHeader,
+    BTab,
+    BTabs,
+    Form,
+    List,
+  },
+  data() {
+    return {
+      tabIndex: 0,
+    };
+  },
+  methods: {
+    linkClass(idx) {
+      return this.tabIndex === idx ? 'bookmark-active' : 'bookmark';
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Main styling for the card to resemble a notebook with tabs */
+.tab-card {
+  background-color: transparent;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Customized header styles to make the tabs look like bookmarks */
+.custom-header {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Tab content area styling */
+/*.component-page {
+  background-color: black;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+*/
+
+/* Tab content area styling */
+.tab-pane {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tab styles to look like bookmarks */
+.nav-link {
+  position: relative;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 0 0 8px 8px;
+  background-color: #c8102e; /* Spanish Red for inactive tabs */
+  transition: background-color 0.3s, transform 0.2s;
+  margin-bottom: -1px;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Active bookmark tab */
+.bookmark-active {
+  background-color: #ffcc00; /* Spanish Yellow */
+  color: black;
+  transform: translateY(-4px);
+  z-index: 10;
+  border-bottom: none;
+}
+
+/* Inactive bookmark tab */
+.bookmark {
+  background-color: #c8102e; /* Spanish Red */
+  color: white;
+}
+
+/* Hover effect for bookmark */
+.nav-link:hover {
+  background-color: #d83f36; /* Darker red when hovered */
+}
+
+/* Underline to enhance the tab separation */
+.nav-tabs {
+  border-bottom: 2px solid #ffcc00; /* Yellow underline for tabs */
+}
+</style>
