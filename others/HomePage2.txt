@@ -1,0 +1,61 @@
+<template>
+  <div class="home-view">
+    <b-card no-body class="tab-card">
+      <b-card-header class="custom-header"></b-card-header>
+      <b-tabs v-model="tabIndex" card class="custom-tabs">
+        <b-tab title="Form" :title-link-class="linkClass(0)">
+          <div class="component-page">
+            <form @add-friend="addFriend"></form>
+          </div>
+        </b-tab>
+        <b-tab title="List" :title-link-class="linkClass(1)">
+          <div class="component-page">
+            <list :friends="friends" @remove-friend="removeFriend"></list>
+          </div>
+        </b-tab>
+        <b-tab title="Gallery" :title-link-class="linkClass(2)">
+          <div class="component-page">
+            <photo-gallery></photo-gallery>
+          </div>
+        </b-tab>
+      </b-tabs>
+    </b-card>
+  </div>
+</template>
+
+<script>
+import { BCard, BCardHeader, BTab, BTabs } from 'bootstrap-vue-next';
+import Form from '../components/pages/Form.vue';
+import List from '../components/pages/List.vue';
+import PhotoGallery from '../components/pages/PhotoGallery.vue';
+
+export default {
+  name: 'HomeView',
+  components: {
+    BCard,
+    BCardHeader,
+    BTab,
+    BTabs,
+    Form,
+    List,
+    PhotoGallery,
+  },
+  data() {
+    return {
+      tabIndex: 0,
+      friends: [],
+    };
+  },
+  methods: {
+    linkClass(idx) {
+      return this.tabIndex === idx ? 'bookmark-active' : 'bookmark';
+    },
+    addFriend(friend) {
+      this.friends.push(friend);
+    },
+    removeFriend(index) {
+      this.friends.splice(index, 1);
+    },
+  },
+};
+</script>
